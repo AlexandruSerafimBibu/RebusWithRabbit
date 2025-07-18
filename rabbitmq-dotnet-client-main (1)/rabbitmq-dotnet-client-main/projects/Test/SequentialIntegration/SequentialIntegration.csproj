@@ -1,0 +1,50 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup Condition="$([MSBuild]::IsOSPlatform('Windows'))">
+    <TargetFrameworks>net8.0;net472</TargetFrameworks>
+    <NoWarn>$(NoWarn);CA2007</NoWarn>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="!$([MSBuild]::IsOSPlatform('Windows'))">
+    <TargetFramework>net8.0</TargetFramework>
+    <NoWarn>$(NoWarn);CA2007</NoWarn>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>../../rabbit.snk</AssemblyOriginatorKeyFile>
+    <SignAssembly>true</SignAssembly>
+    <IsTestProject>true</IsTestProject>
+    <LangVersion>12.0</LangVersion>
+    <TestTfmsInParallel>false</TestTfmsInParallel>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../RabbitMQ.Client.OpenTelemetry/RabbitMQ.Client.OpenTelemetry.csproj" />
+    <ProjectReference Include="../Common/Common.csproj" />
+  </ItemGroup>
+
+  <!--
+    https://github.com/dotnet/msbuild/issues/2281
+    https://stackoverflow.com/a/44502158/1466825
+    https://xunit.net/docs/running-tests-in-parallel
+  -->
+  <ItemGroup>
+    <AssemblyAttribute Include="Xunit.CollectionBehavior">
+      <_Parameter1>Xunit.CollectionBehavior.CollectionPerAssembly</_Parameter1>
+      <_Parameter1_IsLiteral>true</_Parameter1_IsLiteral>
+      <_Parameter1_TypeName>Xunit.CollectionBehavior.CollectionPerAssembly</_Parameter1_TypeName>
+    </AssemblyAttribute>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Text.Json" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="OpenTelemetry.Exporter.InMemory" />
+    <PackageReference Include="xunit" />
+    <PackageReference Include="xunit.runner.visualstudio" PrivateAssets="all" />
+    <PackageReference Include="Xunit.SkippableFact" />
+  </ItemGroup>
+
+</Project>

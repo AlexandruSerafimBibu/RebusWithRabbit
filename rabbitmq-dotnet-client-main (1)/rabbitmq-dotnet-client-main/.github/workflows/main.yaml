@@ -1,0 +1,15 @@
+name: rabbitmq-dotnet-client
+
+on:
+  push:
+    branches:
+      - main
+      - 'rabbitmq-dotnet-client-*'
+  pull_request:
+    branches:
+      - main
+      - 'rabbitmq-dotnet-client-*'
+
+jobs:
+  call-build-test:
+    uses: ./.github/workflows/build-test.yaml

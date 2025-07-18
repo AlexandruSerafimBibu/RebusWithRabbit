@@ -1,0 +1,7 @@
+[submodule "_site"]
+	path = _site
+	url = https://github.com/rabbitmq/rabbitmq-dotnet-client.git
+	branch = gh-pages
+[submodule "projects/toxiproxy-netcore"]
+	path = projects/toxiproxy-netcore
+	url = https://github.com/rabbitmq/toxiproxy-netcore.git
